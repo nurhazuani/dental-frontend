@@ -1,0 +1,105 @@
+<template>
+  <div class="container">
+
+              <b-row class="mt-5 d-flex justify-content-center">
+              <b-col cols="6">
+                <b-card align="center" bg-variant="grey" text-variant="black" header="Register User">
+                    <!-- <h2>Register User</h2> -->
+                <form>
+                  <div class="form-group">
+                    <b-input-group><input
+                                v-model="form.uid"
+                                type="text"
+                                class="form-control"
+                                placeholder="Username/ID Staff"
+                                />
+                              
+                    </b-input-group>
+                    </div>
+                   
+                    <div class="form-group">
+                    <b-input-group><input
+                                v-model="form.email"
+                                type="text"
+                                class="form-control"
+                                placeholder="Email..."
+                                />
+                    </b-input-group>
+                    </div>
+
+                     <div class="form-group">
+                    <b-input-group><input
+                               v-model="form.password"
+                                type="password"
+                                class="form-control"
+                                placeholder="confirm password"
+                                />
+                    </b-input-group>
+                    </div>
+                      <b-button block variant="primary" type="submit"  @click="onHandLeAdd()">Register User</b-button>
+                      <br>
+                     <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                         <ol class="breadcrumb">
+                              <li class="breadcrumb-item active" aria-current="page">{{ meesage }}</li>
+                         </ol>
+                    </nav>
+             </div>
+                  </form>
+                </b-card>
+              </b-col>
+          
+
+            <!-- <b-row class="mt-5 d-flex justify-content-center"> -->
+              
+              </b-row>
+            <!-- </b-row> -->
+  </div>
+</template>
+
+<script>
+
+
+export default {
+   data(){
+     return{
+       users:[],
+       form: {
+          uid:'',
+          uname: '',
+          email:'',
+          password:'',
+          role: 'customer'
+       },
+      
+     }
+   },
+    mounted(){
+          this.getUser() //call back method todos
+      },
+
+       methods: {
+            getUser(){
+                  this.$http.get('http://localhost:3000/users')
+                      .then(res => {
+                          this.users = res.data
+                      })
+            },
+            onHandLeAdd(){
+              this.$http.post('http://localhost:3000/users', this.form)
+                                  .then(() => {
+                                      this.form ={
+                                        uid:'',
+                                        uname: '',
+                                        email:'',
+                                        password:'',
+                                        role:''
+                                      }
+                                    this.getUser()
+                                   
+                                  })  
+            },
+           
+      }
+}
+</script>
