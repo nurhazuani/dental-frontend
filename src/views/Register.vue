@@ -4,14 +4,35 @@
               <b-row class="mt-5 d-flex justify-content-center">
               <b-col cols="6">
                 <b-card align="center" bg-variant="grey" text-variant="black" header="Register User">
+
                     <!-- <h2>Register User</h2> -->
+
                 <form>
+                  <input
+                                v-model="form.role"
+                                type="text"
+                                class="form-control"
+                                placeholder="role"
+                                hidden
+                                /> 
                   <div class="form-group">
                     <b-input-group><input
                                 v-model="form.uid"
                                 type="text"
                                 class="form-control"
-                                placeholder="Username/ID Staff"
+                                placeholder="Username"
+                                @keydown.space.prevent
+                                />
+                              
+                    </b-input-group>
+                    </div>
+
+                     <div class="form-group">
+                    <b-input-group><input
+                                v-model="form.uname"
+                                type="text"
+                                class="form-control"
+                                placeholder="Full Name"
                                 />
                               
                     </b-input-group>
