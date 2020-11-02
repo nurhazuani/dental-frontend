@@ -14,30 +14,43 @@ const routes = [
     path: "/register",
     name: "Register",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Register.vue")
+      import("../views/Register.vue")
   },
   {
     path: "/liststaff",
     name: "Liststaff",
-    // component: Liststaff,
+    
     component: () =>
-    import(/* webpackChunkName: "liststaff" */ "../views/Liststaff.vue")
+    import("../views/Liststaff.vue")
   },
   {
     path: "/service",
     name: "Service",
-    // component: Liststaff,
+   
     component: () =>
-    import(/* webpackChunkName: "liststaff" */ "../views/Service.vue")
+    import("../views/Service.vue")
   },
   {
     path: "/applyappointment",
     name: "Appointment",
-    // component: Liststaff,
-    component: () =>
-    import(/* webpackChunkName: "liststaff" */ "../views/Appointment.vue")
-  },
   
+    component: () =>
+    import("../views/Appointment.vue")
+  },
+  {
+    path: "/listappointmentadmin",
+    name: "ListAppointmentAdmin",
+  
+    component: () =>
+    import( "../views/ListAppointmentAdmin.vue")
+  },
+  {
+    path: "/profilestaff",
+    name: "ProfileStaff",
+  
+    component: () =>
+    import( "../views/ProfileStaff.vue")
+  },
 ];
 
 const router = new VueRouter({

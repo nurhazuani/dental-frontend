@@ -16,9 +16,8 @@
            <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
         <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item active @click="hide">Profile</b-nav-item>
-              <b-nav-item href="/Liststaff" active @click="hide">Profile</b-nav-item>
-              <b-nav-item href="/applyLeave" @click="hide">Dashboard</b-nav-item>
+              <b-nav-item href="/" active @click="hide">Profile</b-nav-item>
+              <b-nav-item href="/" @click="hide">Dashboard</b-nav-item>
               <b-nav-item href="/applyappointment" @click="hide">Appoinment</b-nav-item>
             </b-nav>
           </nav>
@@ -29,7 +28,7 @@
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item active" aria-current="page">List of Staff</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Form Appointment</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -38,21 +37,21 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Staff ID"
-                                disabled
+                                hidden
                                 /> 
                                 <input
                                  v-model="form.id"
                                 type="text"
                                 class="form-control"
                                 placeholder="..."
-                               disabled
+                                hidden
                                 />
                                  <input
                                  v-model="form.status"
                                 type="text"
                                 class="form-control"
                                 placeholder="..."
-                               disabled
+                                hidden
                                 />
 
                             <b-col cols="12">
@@ -135,7 +134,7 @@ export default {
        services:[],
        appointments:[],
        form: {
-          UserUid:'kim90',
+          UserUid:'haha95',
           service:'',
           date:'',
           time:'',
