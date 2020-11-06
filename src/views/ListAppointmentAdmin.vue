@@ -35,101 +35,76 @@
                                 </nav>
                             </div>
                              <input
-                                v-model="form.status"
+                                v-model="form.UserUid"
                                 type="text"
                                 class="form-control"
-                                placeholder="Staff ID"
                                 hidden
                                 /> 
                                 <input
                                  v-model="form.id"
                                 type="text"
                                 class="form-control"
-                                placeholder="..."
-                               hidden
+                                hidden
                                 />
-
-                            <b-col cols="12">
+              <div v-if="form.id">
+              <b-col cols="12">
                 <b-card align="left" bg-variant="grey" text-variant="black" header="List of Doctor Name">
                 <form  > 
                   <b-row align-content="center">
-                  <b-col><input
-                                v-model="form.uid"
-                                type="text"
-                                class="form-control"
-                                placeholder="Staff ID"
-                                @keydown.space.prevent
-                                /> </b-col>
-                    
-                                 <b-col><input
-                                v-model="form.uname"
-                                type="text"
-                                class="form-control"
-                                placeholder="Name"
-                                /> </b-col>
-                                 <b-col><input
-                                v-model="form.position"
-                                type="text"
-                                class="form-control"
-                                placeholder="Position"
-                                /> </b-col>
-                               
-
-                
+                  <b-col>   
+                    <b-form-select 
+                        v-model="form.drName"
+                        :options="users"
+                        value-field="uname" 
+                        text-field="uname"
+                      >
+                      </b-form-select>
+                  </b-col>
                   <b-col>
-                          <b-button variant="primary" type="submit"  @click="onHandLeAdd()" >Add</b-button>
+                          <b-button variant="primary" type="submit"  @click="onHandLeUpdate()">Submit</b-button>
                   </b-col>
                     </b-row>
                       <br>
                   </form>
                 </b-card>
               </b-col>
-            <!-- </b-row> -->
-                          <!-- <input
-                                v-model="form.role"
-                                type="text"
-                                class="form-control"
-                                placeholder="..."
-                                hidden
-                                /> -->
-                                
-            <br>
-     <b-table-simple hover small caption-top responsive>
-     
-  
-    <b-thead head-variant="dark">
-      <b-tr>
-        <b-th colspan="2">Name</b-th>
-        <b-th colspan="2">Contact</b-th>
-        <b-th colspan="3">Service</b-th>
-        <b-th colspan="2">Dr Name</b-th>
-        <b-th >Time</b-th>
-         <b-th >Status</b-th>
-        <b-th >Action</b-th>
-      </b-tr>
-    </b-thead>
-    <b-tbody   v-for="(listaptmnt) in appointments" :key="listaptmnt.id"> 
-      <b-tr>
-        <b-td  colspan="2"
-      
-        >{{ listaptmnt.uname }}</b-td>
-         <b-td  colspan="3">{{ listaptmnt.email }} </b-td>
-        <b-td  colspan="2">{{listaptmnt.service }}</b-td>
-        <b-td  colspan="2">
-        </b-td> 
-        <b-td  ><p>{{ listaptmnt.date }}</p>
-                <p>{{ listaptmnt.time }}</p>
-        </b-td>
-           <b-td  > {{ listaptmnt.status }} </b-td>
-        <b-td > 
-          <b-btn variant="danger"  @click="onHandLeClickDelete(listaptmnt.uid)">
-            <span class="fa fa-edit"></span>
-          </b-btn>
-        </b-td>
-      </b-tr>
-    </b-tbody>
-  </b-table-simple>
- 
+              </div>
+        <!-- <br> -->
+        <div>
+        <b-table-simple hover small caption-top responsive>
+            <b-thead head-variant="dark">
+              <b-tr>
+                <b-th colspan="2">Name</b-th>
+                <b-th colspan="2">Contact</b-th>
+                <b-th colspan="3">Service</b-th>
+                <b-th colspan="2">Dr Name</b-th>
+                <b-th >Time</b-th>
+                <b-th >Status</b-th>
+                <b-th >Action</b-th>
+              </b-tr>
+            </b-thead>
+            <b-tbody   v-for="listaptmnt in appointments" :key="listaptmnt.id"> 
+              <b-tr>
+                <b-td colspan="2"> <p v-if="listaptmnt.User">{{ listaptmnt.User.uname }} </p> </b-td>
+                <b-td colspan="2"> <p>{{ listaptmnt.User.email }} </p>
+                        <p>{{ listaptmnt.User.phone }} </p>
+                </b-td>
+                <b-td  colspan="3">{{ listaptmnt.service }}</b-td>
+                <b-td  colspan="2"> {{ listaptmnt.drName }}
+                </b-td> 
+                <b-td  ><p>{{ listaptmnt.date }}</p>
+                        <p>{{ listaptmnt.time }}</p>
+                </b-td>
+                  <b-td  > {{ listaptmnt.status }} </b-td>
+                <b-td > 
+                  <b-btn variant="info"  @click="onHandLeClickUpdate(listaptmnt)">
+                    <span class="fa fa-edit"></span>
+                  </b-btn>
+                </b-td>
+              </b-tr>
+            </b-tbody>
+      </b-table-simple>
+        </div>
   </div>
 </template>
 
@@ -137,24 +112,22 @@
 export default {
    data(){
      return{
+       hide:'',
        users:[],
        appointments:[],
        form: {
           UserUid:'',
           drName:'',
-          status:'',
        },
      }
    },
     mounted(){
           this.getListAppointment() 
-          // this.getUser()
+          this.getPosition()
       },
 
        methods: {
             getListAppointment(){
-                // var uid = this.form.UserUid
-
                   this.$http.get('http://localhost:3000/appointment')
                       .then(res => {
                           this.appointments = res.data
@@ -162,38 +135,29 @@ export default {
                       })  
             },
 
-            getUser(){
-                  this.$http.get('http://localhost:3000/users')
+            getPosition(){
+
+                  this.$http.get('http://localhost:3000/users/position/dr')
                       .then(res => {
                           this.users = res.data
                       })
             },
-              onHandLeAdd(){
-              this.$http.post('http://localhost:3000/users', this.form)
+              onHandLeUpdate(){
+              var uid = this.form.UserUid
+              var id = this.form.id
+              this.$http.patch(`http://localhost:3000/appointment/${uid}/${id}`, this.form)
                                   .then(() => {
                                       this.form ={
-                                      uid:'',
-                                      uname: '',
-                                      password:'',
-                                      position:'',
-                                      role: ''
+                                        // UserUid:'',
+                                        drName:''
                                       }
-                                   this.getStaff() 
+                                    this.getListAppointment()
                                   })  
             },
 
-            onHandLeClickDelete(uid){ 
-              this.$http.delete(`http://localhost:3000/users/${uid}`) 
-                              .then(() => {
-                                this.form ={
-                                      uid:'',
-                                      uname: '',
-                                      password:'123abc',
-                                      position:'',
-                                      role: 'Staff'
-                                      }
-                                      this.getStaff() 
-                                  })               
+            onHandLeClickUpdate(listaptmnt){
+            this.form = listaptmnt
+            this.getListAppointment()
             },
       },
 }

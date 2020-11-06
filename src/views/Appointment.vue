@@ -134,7 +134,7 @@ export default {
        services:[],
        appointments:[],
        form: {
-          UserUid:'haha95',
+          UserUid:'st13',
           service:'',
           date:'',
           time:'',
@@ -180,7 +180,6 @@ export default {
               this.$http.post(`http://localhost:3000/appointment/${uid}`, this.form)
                                   .then(() => {
                                       this.form ={
-                                       
                                         service:'',
                                         date:'',
                                         time:'',
