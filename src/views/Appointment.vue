@@ -16,7 +16,7 @@
            <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
         <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/" active @click="hide">Profile</b-nav-item>
+              <b-nav-item href="/profilecustomer" active @click="hide">Profile</b-nav-item>
               <b-nav-item href="/" @click="hide">Dashboard</b-nav-item>
               <b-nav-item href="/applyappointment" @click="hide">Appoinment</b-nav-item>
             </b-nav>
@@ -112,7 +112,7 @@
         <b-td  colspan="2">{{ cust.time }}</b-td>     
         <b-td  > {{ cust.status }} </b-td>
         <b-td > 
-          <b-btn variant="danger"  @click="onHandLeClickUpdate(cust)">
+          <b-btn variant="info"  @click="onHandLeClickUpdate(cust)">
             <span class="fa fa-edit"></span>
           </b-btn>
            <b-btn variant="danger"  @click="onHandLeClickDelete(cust.id)">
@@ -184,7 +184,6 @@ export default {
                                         date:'',
                                         time:'',
                                         status:'request',
-                                        
                                       }
                                   this.getAppointment()
                                   })  

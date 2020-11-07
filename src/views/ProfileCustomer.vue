@@ -16,11 +16,9 @@
            <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
         <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/profilestaff" active @click="hide">Profile</b-nav-item>
-              <b-nav-item href="/Liststaff" active @click="hide">List Staff</b-nav-item>
-              <b-nav-item href="/listappointmentadmin" @click="hide">Appoinment</b-nav-item>
-              <b-nav-item href="/applyLeave" @click="hide">Service</b-nav-item>
-               <b-nav-item href="/applyLeave" @click="hide">Sechedule</b-nav-item>
+              <b-nav-item href="/profilecustomer" active @click="hide">Profile</b-nav-item>
+              <b-nav-item href="/" @click="hide">Dashboard</b-nav-item>
+              <b-nav-item href="/applyappointment" @click="hide">Appoinment</b-nav-item>
             </b-nav>
           </nav>
       </div>
@@ -45,7 +43,7 @@
                                         v-model="form.uid"
                                         type="text"
                                         class="form-control"
-                                        v-if="form.position"
+                                        v-if="form.uname"
                                         disabled
                                         /> 
                                          <span v-else> {{ staff.uid }} </span>  
@@ -57,33 +55,18 @@
                                         v-model="form.uname"
                                         type="text"
                                         class="form-control"
-                                        v-if="form.position"
-                                        disabled
+                                        v-if="form.uname"
                                         />
                                         <span v-else > {{ staff.uname }} </span>
                             </b-input-group>
                             </div>
-
-                            <div class="form-group">
-                            <b-input-group>Position :
-                            <input
-                                        v-model="form.position"
-                                        type="text"
-                                        class="form-control"
-                                        v-if="form.position"
-                                        disabled
-                                        />
-                                         <span v-else> {{ staff.position }} </span>
-                            </b-input-group>
-                            </div>
-                          
                             <div class="form-group">
                             <b-input-group>Email : 
                               <input
                                         v-model="form.email"
                                         type="text"
                                         class="form-control"
-                                        v-if="form.position"
+                                        v-if="form.uname"
                                         />
                                         <span v-else> {{ staff.email }} </span>
                             </b-input-group>
@@ -95,13 +78,13 @@
                                         v-model="form.phone"
                                         type="text"
                                         class="form-control"
-                                        v-if="form.position"
+                                        v-if="form.uname"
                                         />
                                          <span v-else> {{ staff.phone }} </span>
                             </b-input-group>
                             </div>
-                          <b-button variant="info" type="submit" v-if="form.position" @click="onHandLeUpdate()">Update</b-button>
-                          <b-button variant="outline-secondary" type="submit" v-if="form.position" @click="onHandLeCancel()" >Cancel</b-button>   
+                          <b-button variant="info" type="submit" v-if="form.uname" @click="onHandLeUpdate()">Update</b-button>
+                          <b-button variant="outline-secondary" type="submit" v-if="form.uname" @click="onHandLeCancel()" >Cancel</b-button>   
                           <b-button variant="primary"  @click="onHandLeClickUpdate(staff)" >Edit</b-button>
                   </form>
                 </b-card>
@@ -111,15 +94,6 @@
                 <b-card align="left" bg-variant="grey" text-variant="black" header="Update Password" 
                  v-for="(staff) in users" :key="staff.uid">
                    <form >
-                            
-                            <!-- <div class="form-group">
-                            <b-input-group>Email : <input
-                                        v-model="form.password"
-                                        type="text"
-                                        class="form-control"
-                                        />
-                            </b-input-group>
-                            </div> -->
 
                             <div class="form-group">
                             <b-input-group>Password: 
@@ -144,17 +118,16 @@
 export default {
    data(){
      return{
-       hide:'',
-       users:[],
-       form: {
-         id:'',
-              uid:'AT2',
-              uname: '',
-              position:'',
-              email: '',
-              phone:'',
-              password:''
-        },
+        hide:'',
+        users:[],
+        form: {
+            id:'',
+                uid:'kim90',
+                uname: '',
+                email: '',
+                phone:'',
+                password:''
+            },
      }
    },
    mounted(){
@@ -181,7 +154,6 @@ export default {
                                       this.form ={
                                         uid:'',
                                         uname: '',
-                                        position:'',
                                         email: '',
                                         phone:'',
                                       }
@@ -197,9 +169,8 @@ export default {
           onHandLeCancel(){
                   
             this.form ={
-                  uid:'AT2',
+                  uid:'kim90',
                   uname: '',
-                  position:'',
                   email: '',
                   phone:'',
                   password:''

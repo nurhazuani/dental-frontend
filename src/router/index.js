@@ -45,11 +45,25 @@ const routes = [
     import( "../views/ListAppointmentAdmin.vue")
   },
   {
+    path: "/listappointmentdoctor",
+    name: "ListAppointmentDr",
+  
+    component: () =>
+    import( "../views/ListAppointmentDr.vue")
+  },
+  {
     path: "/profilestaff",
     name: "ProfileStaff",
   
     component: () =>
     import( "../views/ProfileStaff.vue")
+  },
+  {
+    path: "/profilecustomer",
+    name: "ProfileCustomer",
+  
+    component: () =>
+    import( "../views/ProfileCustomer.vue")
   },
 ];
 

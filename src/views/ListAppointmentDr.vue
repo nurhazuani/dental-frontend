@@ -16,10 +16,8 @@
            <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
         <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item active @click="hide">Profile</b-nav-item>
-              <b-nav-item href="/Liststaff" active @click="hide">List Staff</b-nav-item>
-              <b-nav-item href="/listappointmentadmin" @click="hide">Appoinment</b-nav-item>
-              <b-nav-item href="/applyLeave" @click="hide">Service</b-nav-item>
+              <b-nav-item href="/Liststaff" active @click="hide">Profile</b-nav-item>
+              <b-nav-item href="/listappointmentadmin" @click="hide">Appointment</b-nav-item>
                <b-nav-item href="/applyLeave" @click="hide">Sechedule</b-nav-item>
             </b-nav>
           </nav>
@@ -34,7 +32,7 @@
                                     </ol>
                                 </nav>
                             </div>
-                             <input
+                             <!-- <input
                                 v-model="form.UserUid"
                                 type="text"
                                 class="form-control"
@@ -45,32 +43,7 @@
                                 type="text"
                                 class="form-control"
                                 hidden
-                                />
-              <div v-if="form.id">
-              <b-col cols="12">
-                <b-card align="left" bg-variant="grey" text-variant="black" header="List of Doctor Name">
-                <form  > 
-                  <b-row align-content="center">
-                  <b-col>   
-                    <b-form-select 
-                        v-model="form.drName"
-                        :options="users"
-                        value-field="uname" 
-                        text-field="uname"
-                      >
-                      </b-form-select>
-                  </b-col>
-                  <b-col>
-                          <b-button variant="primary" type="submit"  @click="onHandLeUpdate()">Submit</b-button>
-                  </b-col>
-                    </b-row>
-                      <br>
-                  </form>
-                </b-card>
-              </b-col>
-              </div>
-        <!-- <br> -->
-        <div>
+                                /> -->
         <b-table-simple hover small caption-top responsive>
             <b-thead head-variant="dark">
               <b-tr>
@@ -84,8 +57,9 @@
               </b-tr>
             </b-thead>
             <b-tbody   v-for="listaptmnt in appointments" :key="listaptmnt.id"> 
-              <b-tr>
-                <b-td colspan="2"> <p v-if="listaptmnt.User">{{ listaptmnt.User.uname }} </p> </b-td>
+              <b-tr >
+                  <b-td  colspan="3"> <p> {{listaptmnt.id}} </p> <p> {{listaptmnt.UserUid}} </p></b-td>
+                <b-td colspan="2"><p v-if="listaptmnt.User">{{ listaptmnt.User.uname }} </p> </b-td>
                 <b-td colspan="2"> <p>{{ listaptmnt.User.email }} </p>
                         <p>{{ listaptmnt.User.phone }} </p>
                 </b-td>
@@ -97,14 +71,22 @@
                 </b-td>
                   <b-td  > {{ listaptmnt.status }} </b-td>
                 <b-td > 
-                  <b-btn variant="info"  @click="onHandLeClickUpdate(listaptmnt)">
-                    <span class="fa fa-edit"></span>
-                  </b-btn>
+                   <b-button variant="success" type="submit"
+                            v-model="form.status"
+                            value="approve"
+                            @change="  onHandLeClickUpdate(listaptmnt)"
+                            @click="onHandLeUpdate()">Approve</b-button>
+                     <b-button variant="danger" type="submit"  
+                            v-model="form.status"
+                            value="approve"
+                            @click="onHandLeUpdate()">
+                            
+                            </b-button>
                 </b-td>
               </b-tr>
             </b-tbody>
       </b-table-simple>
-        </div>
+     
   </div>
 </template>
 
@@ -117,13 +99,12 @@ export default {
        appointments:[],
        form: {
           UserUid:'',
-          drName:'',
+          status:''
        },
      }
    },
     mounted(){
           this.getListAppointment() 
-          this.getPosition()
       },
 
        methods: {
@@ -135,21 +116,15 @@ export default {
                       })  
             },
 
-            getPosition(){
-
-                  this.$http.get('http://localhost:3000/users/position/doctor')
-                      .then(res => {
-                          this.users = res.data
-                      })
-            },
               onHandLeUpdate(){
               var uid = this.form.UserUid
               var id = this.form.id
+            //     var uid = this.listaptmnt.UserUid
+            //   var id = this.listaptmnt.id
               this.$http.patch(`http://localhost:3000/appointment/${uid}/${id}`, this.form)
                                   .then(() => {
                                       this.form ={
-                                        // UserUid:'',
-                                        drName:''
+                                        status:''
                                       }
                                     this.getListAppointment()
                                   })  
