@@ -46,7 +46,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
-            List of Appointment
+            List of Doctor Schedule
           </li>
         </ol>
       </nav>
@@ -59,7 +59,7 @@
           align="left"
           bg-variant="grey"
           text-variant="black"
-          header="List of Doctor Name"
+          header="List of Doctor Schedule"
         >
           <form>
             <b-row align-content="center">
@@ -87,7 +87,7 @@
       </b-col>
     </div>
 
-  <div>
+    <div>
     <b-dropdown size="sm" text="Doctor's Name" class="m-2">
       <b-dropdown-item-button>Action</b-dropdown-item-button>
       <b-dropdown-item-button>Another action</b-dropdown-item-button>
@@ -100,10 +100,9 @@
       <b-table-simple hover small caption-top responsive>
         <b-thead head-variant="dark">
           <b-tr>
-            <b-th colspan="2">Name</b-th>
-            <b-th colspan="2">Contact</b-th>
-            <b-th colspan="3">Service</b-th>
-            <b-th colspan="2">Dr Name</b-th>
+            <b-th colspan="2">Customer Name</b-th>
+            <b-th colspan="2">Service</b-th>
+            <b-th colspan="3">Date</b-th>
             <b-th>Time</b-th>
             <b-th>Status</b-th>
             <b-th>Action</b-th>
@@ -164,11 +163,9 @@ export default {
     },
 
     getPosition() {
-      this.$http
-        .get("http://localhost:3000/users/position/doctor")
-        .then(res => {
-          this.users = res.data;
-        });
+      this.$http.get("http://localhost:3000/users/position/dr").then(res => {
+        this.users = res.data;
+      });
     },
     onHandLeUpdate() {
       var uid = this.form.UserUid;
