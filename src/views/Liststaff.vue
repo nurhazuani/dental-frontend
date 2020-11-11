@@ -32,9 +32,9 @@
               <b-nav-item href="/listappointmentadmin" @click="hide"
                 >Appoinment</b-nav-item
               >
-              <b-nav-item href="/applyLeave" @click="hide">Service</b-nav-item>
-              <b-nav-item href="/applyLeave" @click="hide"
-                >Sechedule</b-nav-item
+              <b-nav-item href="/service" @click="hide">Service</b-nav-item>
+              <b-nav-item href="/historyappointment" @click="hide"
+                >History Appoinment</b-nav-item
               >
             </b-nav>
           </nav>
@@ -94,11 +94,9 @@
             </b-col>
             <b-col>
               <b-form-select
+                lable="Position"
                 v-model="form.position"
-                :options="[
-                 'Doctor',
-                 'Staff'
-                ]"
+                :options="['Doctor', 'Staff']"
               >
               </b-form-select>
             </b-col>
@@ -113,8 +111,8 @@
         </form>
       </b-card>
     </b-col>
-   
-    <br>
+
+    <br />
     <b-table-simple hover small caption-top responsive>
       <b-thead head-variant="dark">
         <b-tr>
@@ -149,7 +147,7 @@
 export default {
   data() {
     return {
-      hide:'',
+      hide: "",
       users: [],
       form: {
         uid: "",

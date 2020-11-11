@@ -32,6 +32,9 @@
               <b-nav-item href="/applyappointment" @click="hide"
                 >Appoinment</b-nav-item
               >
+              <b-nav-item href="/historyappointment" @click="hide"
+                >Hstory Appointment</b-nav-item
+              >
             </b-nav>
           </nav>
         </div>
@@ -90,6 +93,16 @@
             </b-col>
 
             <b-col>
+              <b-form-datepicker
+                id="datepicker-sm"
+                size="sm"
+                locale="en"
+                class="mb-2"
+                v-model="form.date"
+              ></b-form-datepicker>
+            </b-col>
+
+            <b-col>
               <b-form-select
                 v-model="form.time"
                 :options="[
@@ -104,15 +117,6 @@
                 ]"
               >
               </b-form-select>
-            </b-col>
-            <b-col>
-              <b-form-datepicker
-                id="datepicker-sm"
-                size="sm"
-                locale="en"
-                class="mb-2"
-                v-model="form.date"
-              ></b-form-datepicker>
             </b-col>
 
             <b-col>
@@ -164,9 +168,6 @@
             <b-btn variant="info" @click="onHandLeClickUpdate(cust)">
               <span class="fa fa-edit"></span>
             </b-btn>
-            <b-btn variant="danger" @click="onHandLeClickDelete(cust.id)">
-              <span class="fa fa-trash"></span>
-            </b-btn>
           </b-td>
         </b-tr>
       </b-tbody>
@@ -178,16 +179,16 @@
 export default {
   data() {
     return {
-      hide:'',
+      hide: "",
       users: [],
       services: [],
       appointments: [],
       form: {
-        UserUid: "st13",
+        UserUid: "kim90",
         service: "",
         date: "",
         time: "",
-        status: "request",
+        status: "Request",
         role: "customer"
       },
       value: ""
@@ -229,7 +230,7 @@ export default {
             service: "",
             date: "",
             time: "",
-            status: "request"
+            status: "Request"
           };
           this.getAppointment();
         });
@@ -247,7 +248,7 @@ export default {
             date: "",
             time: "",
             status: "",
-            role: "customer"
+            role: "Request"
           };
           this.getAppointment();
         });
@@ -264,11 +265,11 @@ export default {
         .delete(`http://localhost:3000/appointment/${uid}/${id}`)
         .then(() => {
           this.form = {
-            UserUid: "kim90",
+            UserUid: "",
             service: "",
             date: "",
             time: "",
-            status: "request",
+            status: "Request",
             role: "customer"
           };
           this.getAppointment();
@@ -279,7 +280,7 @@ export default {
         service: "",
         date: "",
         time: "",
-        status: "request"
+        status: "Request"
       };
     }
   }

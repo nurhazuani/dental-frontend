@@ -25,14 +25,14 @@
           ></b-img>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/Liststaff" active @click="hide"
+              <b-nav-item href="/profilestaff" active @click="hide"
                 >Profile</b-nav-item
               >
-              <b-nav-item href="/listappointmentadmin" @click="hide"
+              <b-nav-item href="/listappointmentdoctor" @click="hide"
                 >Appointment</b-nav-item
               >
               <b-nav-item href="/applyLeave" @click="hide"
-                >Sechedule</b-nav-item
+                >Hisory Appointment</b-nav-item
               >
             </b-nav>
           </nav>
@@ -50,35 +50,19 @@
       </nav>
     </div>
     <input v-model="form.drName" type="text" class="form-control" hidden />
-    <!-- <input
-                                 v-model="form.id"
-                                type="text"
-                                class="form-control"
-                                /> -->
+  
     <b-table-simple hover small caption-top responsive>
       <b-thead head-variant="dark">
         <b-tr @change="onHandLeClickUpdate(listaptmnt)">
           <b-th colspan="2">Name</b-th>
           <b-th colspan="2">Contact</b-th>
           <b-th colspan="3">Service</b-th>
-          <b-th colspan="2">Dr Name</b-th>
-          <b-th>Time</b-th>
           <b-th>Status</b-th>
           <b-th>Action</b-th>
         </b-tr>
       </b-thead>
-      <b-tbody v-for="listaptmnt in appointments" :key="listaptmnt.id" >
-         <b-tr>
-       <p>hai</p>
-          
-        </b-tr>
+      <b-tbody v-for="listaptmnt in appointments" :key="listaptmnt.id">
         <b-tr>
-          <!-- <b-td colspan="3">
-            <p><input v-model="form.id" type="text" class="form-control" /></p>
-            <p> {{ listaptmnt.id }}</p>
-            <p><input v-model="form.UserUid" type="text" class="form-control" /></p>
-              <p> {{ listaptmnt.UserUid }}</p>
-            </b-td> -->
           <b-td colspan="2"
             ><p v-if="listaptmnt.User">{{ listaptmnt.User.uname }}</p>
           </b-td>
@@ -87,25 +71,54 @@
             <p v-if="listaptmnt.User">{{ listaptmnt.User.phone }}</p>
           </b-td>
           <b-td colspan="3">{{ listaptmnt.service }}</b-td>
-          <b-td colspan="2"> {{ listaptmnt.drName }} </b-td>
-          <b-td
-            ><p>{{ listaptmnt.date }}</p>
-            <p>{{ listaptmnt.time }}</p>
-          </b-td>
           <b-td> {{ listaptmnt.status }} </b-td>
           <b-td>
-            <b-button
-              v-model="form.status"
-              variant="info"
-              type="submit"
-             @click="onHandLeClickUpdate(listaptmnt)"
+            <b-button variant="info" @click="onHandLeClickUpdate(listaptmnt)"
               >Show Detail</b-button
             >
           </b-td>
         </b-tr>
-       
       </b-tbody>
     </b-table-simple>
+
+    <b-modal id="modal-list-appointment" @hidden="onHandleCancel">
+      <b-form>
+        <b-form-group >
+          <input v-model="form.UserUid" hidden />
+          <input v-model="form.id" hidden />
+        </b-form-group>
+
+        <b-form-group label="Service: ">
+          <b-form-input v-model="form.service" disabled />
+        </b-form-group>
+
+        <b-form-group label="Date&Time: ">
+          <b-form-input v-model="form.date" disabled />
+          <b-form-input v-model="form.time" disabled />
+        </b-form-group>
+
+        <b-form-group label="Action: ">
+          <b-form-select v-model="form.status" :options="['Approve', 'Reject']">
+          </b-form-select>
+        </b-form-group>
+      </b-form>
+
+      <template v-slot:modal-footer>
+        <div class="w-100">
+          <b-button @click="onHandleCancel">Cancel</b-button>
+
+          <b-button
+            variant="info"
+            class="float-right"
+             type="submit"
+            v-if="form.id"
+            @click="onHandLeUpdate()"
+          >
+            Submit
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -120,12 +133,11 @@ export default {
         UserUid: "",
         status: "",
         drName: "wani"
-      },
+      }
     };
   },
   mounted() {
     this.getListAppointment();
-    
   },
 
   methods: {
@@ -139,25 +151,36 @@ export default {
         });
     },
 
+    onClickAdd() {
+      this.$bvModal.show("modal-list-appointment");
+    },
+
     onHandLeUpdate() {
       var uid = this.form.UserUid;
       var id = this.form.id;
-      //     var uid = this.listaptmnt.UserUid
-      // id = this.listaptmnt.id
-     
+
       this.$http
         .patch(`http://localhost:3000/appointment/${uid}/${id}`, this.form)
         .then(() => {
           this.form = {
             status: ""
           };
+          this.$bvModal.hide("modal-list-appointment");
           this.getListAppointment();
         });
     },
 
     onHandLeClickUpdate(listaptmnt) {
       this.form = listaptmnt;
-      this.getListAppointment();
+      this.$bvModal.show("modal-list-appointment");
+    },
+
+    onHandleCancel() {
+      this.form = {
+        status: "",
+        drName: "wani"
+      };
+      this.$bvModal.hide("modal-list-appointment");
     }
   }
 };

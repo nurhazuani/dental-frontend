@@ -52,6 +52,13 @@ const routes = [
     import( "../views/ListAppointmentDr.vue")
   },
   {
+    path: "/historyappointment",
+    name: "HistoryAppointment",
+  
+    component: () =>
+    import( "../views/HistoryAppointment.vue")
+  },
+  {
     path: "/profilestaff",
     name: "ProfileStaff",
   
@@ -65,6 +72,8 @@ const routes = [
     component: () =>
     import( "../views/ProfileCustomer.vue")
   },
+
+
 ];
 
 const router = new VueRouter({
