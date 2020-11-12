@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- <Navbar /> -->
     <div class="row"> 
       <div class="col-md-3"> </div>
 
@@ -28,7 +29,14 @@
 </template>
 
 <script>
+
+// import Navbar from "./components/Navbar.vue";
+
 export default {
+   name: "login",
+  //  components: {
+  //       Navbar,
+  //     },
   
 }
 </script>

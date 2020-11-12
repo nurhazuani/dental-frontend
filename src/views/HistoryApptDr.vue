@@ -48,33 +48,19 @@
           ></b-img>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/profilestaff" active @click="hide"
+              <b-nav-item href="/profiledoctor" active @click="hide"
                 ><i class="fa fa-address-card" aria-hidden="true">
                   Profile</i
                 ></b-nav-item
               >
-              <b-nav-item href="/liststaff" @click="hide"
-                ><i class="fa fa-tachometer" aria-hidden="true">
-                  List Staff
-                </i></b-nav-item
-              >
-              <b-nav-item href="/listappointmentadmin" @click="hide"
+             
+              <b-nav-item href="/listappointmentdoctor" @click="hide"
                 ><i class="fa fa-book" aria-hidden="true">
                   Appointment</i
                 ></b-nav-item
               >
-              <b-nav-item href="/service" @click="hide"
-                ><i class="fa fa-book" aria-hidden="true">
-                  Service</i
-                ></b-nav-item
-              >
-
-              <b-nav-item href="/service" @click="hide"
-                ><i class="fa fa-book" aria-hidden="true">
-                  Doctor Schedule</i
-                ></b-nav-item
-              >
-              <b-nav-item href="/historyappointment" @click="hide"
+              
+              <b-nav-item href="/historyappointmentdr" @click="hide"
                 ><i class="fa fa-history" aria-hidden="true">
                   History Appointment</i
                 ></b-nav-item
@@ -98,6 +84,8 @@
       </div>
 
       <div>
+      <input v-model="form.drName" type="text" class="form-control" hidden />
+
         <b-table-simple hover small caption-top responsive>
           <b-thead head-variant="dark">
             <b-tr>
@@ -105,7 +93,7 @@
               <b-th colspan="2">Contact</b-th>
               <b-th colspan="3">Service</b-th>
               <b-th>Time</b-th>
-              <b-th colspan="2">Dr Name</b-th>
+              <!-- <b-th colspan="2">Dr Name</b-th> -->
               <b-th>Status</b-th>
             </b-tr>
           </b-thead>
@@ -123,7 +111,7 @@
                 ><p>{{ listaptmnt.date }}</p>
                 <p>{{ listaptmnt.time }}</p>
               </b-td>
-              <b-td colspan="2"> {{ listaptmnt.drName }} </b-td>
+              <!-- <b-td colspan="2"> {{ listaptmnt.drName }} </b-td> -->
               <b-td> {{ listaptmnt.status }} </b-td>
             </b-tr>
           </b-tbody>
@@ -139,7 +127,10 @@ export default {
     return {
       hide: "",
       users: [],
-      appointments: []
+      appointments: [],
+      form:{
+          drName: 'Nurhazuani Nurdin'
+      }
     };
   },
   mounted() {
@@ -147,14 +138,15 @@ export default {
   },
 
   methods: {
-    getListAppointment() {
+     getListAppointment() {
+      var drname = this.form.drName;
       this.$http
-        .get("http://localhost:3000/appointment/status/approve")
+        .get(`http://localhost:3000/appointment/history/request/${drname}`)
         .then(res => {
           this.appointments = res.data;
           console.log(res.data);
         });
-    }
+    },
   }
 };
 </script>

@@ -1,8 +1,27 @@
 <template>
-  <div class="container">
+  <div>
+    <b-navbar
+      toggleable="lg"
+      type="light"
+      class="shadow-lg"
+      style="background-color: #28a745;"
+    >
+      <b-button v-b-toggle.sidebar-footer class="fa fa-bars"></b-button>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-button class="fa fa-sign-out" href="/Login">
+            <router-link to="/Login"></router-link
+          ></b-button>
+          <!-- <b-nav-item> <router-link to="/Login">Logout</router-link></b-nav-item> -->
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+
     <div align="left">
       <div align="right">
-        <b-button v-b-toggle.sidebar-footer>Menu</b-button>
+        <!-- <b-button v-b-toggle.sidebar-footer>Menu</b-button> -->
       </div>
 
       <b-sidebar
@@ -14,7 +33,11 @@
         <template #footer="{ hide }">
           <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
             <strong class="mr-auto"></strong>
-            <b-button size="sm" @click="hide">Close</b-button>
+            <b-button
+              size="sm"
+              @click="hide"
+              class="fa fa-window-close"
+            ></b-button>
           </div>
         </template>
         <div class="px-3 py-2">
@@ -25,112 +48,133 @@
           ></b-img>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item active @click="hide">Profile</b-nav-item>
-              <b-nav-item href="/Liststaff" active @click="hide"
-                >List Staff</b-nav-item
+              <b-nav-item href="/profilestaff" active @click="hide"
+                ><i class="fa fa-address-card" aria-hidden="true">
+                  Profile</i
+                ></b-nav-item
+              >
+              <b-nav-item href="/liststaff" @click="hide"
+                ><i class="fa fa-tachometer" aria-hidden="true">
+                  List Staff
+                </i></b-nav-item
               >
               <b-nav-item href="/listappointmentadmin" @click="hide"
-                >Appoinment</b-nav-item
+                ><i class="fa fa-book" aria-hidden="true">
+                  Appointment</i
+                ></b-nav-item
               >
-              <b-nav-item href="/service" @click="hide">Service</b-nav-item>
+              <b-nav-item href="/service" @click="hide"
+                ><i class="fa fa-book" aria-hidden="true">
+                  Service</i
+                ></b-nav-item
+              >
+
+              <b-nav-item href="/service" @click="hide"
+                ><i class="fa fa-book" aria-hidden="true">
+                  Doctor Schedule</i
+                ></b-nav-item
+              >
               <b-nav-item href="/historyappointment" @click="hide"
-                >History Appoinment</b-nav-item
+                ><i class="fa fa-history" aria-hidden="true">
+                  History Appointment</i
+                ></b-nav-item
               >
             </b-nav>
           </nav>
         </div>
       </b-sidebar>
     </div>
-
     <br />
-    <div class="page-breadcrumb">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            List of Appointment
-          </li>
-        </ol>
-      </nav>
-    </div>
-    <input v-model="form.UserUid" type="text" class="form-control" hidden />
-    <input v-model="form.id" type="text" class="form-control" hidden />
-    <div v-if="form.id">
-      <b-col cols="12">
-        <b-card
-          align="left"
-          bg-variant="grey"
-          text-variant="black"
-          header="List of Doctor Name"
-        >
-          <form>
-            <b-row align-content="center">
-              <b-col>
-                <b-form-select
-                  v-model="form.drName"
-                  :options="users"
-                  value-field="uname"
-                  text-field="uname"
-                >
-                </b-form-select>
-              </b-col>
-              <b-col>
-                <b-button
-                  variant="primary"
-                  type="submit"
-                  @click="onHandLeUpdate()"
-                  >Submit</b-button
-                >
-              </b-col>
-            </b-row>
-            <br />
-          </form>
-        </b-card>
-      </b-col>
-    </div>
-    <!-- <br> -->
-    <div>
-      <b-table-simple hover small caption-top responsive>
-        <b-thead head-variant="dark">
-          <b-tr>
-            <b-th colspan="2">Name</b-th>
-            <b-th colspan="2">Contact</b-th>
-            <b-th colspan="3">Service</b-th>
-            <b-th>Time</b-th>
-            <b-th colspan="2">Dr Name</b-th>
-            <b-th>Status</b-th>
-            <b-th>Action</b-th>
-          </b-tr>
-        </b-thead>
-        <b-tbody v-for="listaptmnt in appointments" :key="listaptmnt.id">
-          <b-tr>
-            <b-td colspan="2">
-              <p v-if="listaptmnt.User">{{ listaptmnt.User.uname }}</p>
-            </b-td>
-            <b-td colspan="2">
-              <p>{{ listaptmnt.User.email }}</p>
-              <p>{{ listaptmnt.User.phone }}</p>
-            </b-td>
-            <b-td colspan="3">{{ listaptmnt.service }}</b-td>
-            <b-td
-              ><p>{{ listaptmnt.date }}</p>
-              <p>{{ listaptmnt.time }}</p>
-            </b-td>
-            <b-td colspan="2"> {{ listaptmnt.drName }} </b-td>
-            <b-td> {{ listaptmnt.status }} </b-td>
-            <b-td>
-              <b-btn variant="info" @click="onHandLeClickUpdate(listaptmnt)">
-                <span class="fa fa-edit"></span>
-              </b-btn>
-            </b-td>
-          </b-tr>
-        </b-tbody>
-      </b-table-simple>
+
+    <div class="container">
+      <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              List of Appointment
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <input v-model="form.UserUid" type="text" class="form-control" hidden />
+      <input v-model="form.id" type="text" class="form-control" hidden />
+      <div v-if="form.id">
+        <b-col cols="12">
+          <b-card
+            align="left"
+            bg-variant="grey"
+            text-variant="black"
+            header="List of Doctor Name"
+          >
+            <form>
+              <b-row align-content="center">
+                <b-col>
+                  <b-form-select
+                    v-model="form.drName"
+                    :options="users"
+                    value-field="uname"
+                    text-field="uname"
+                  >
+                  </b-form-select>
+                </b-col>
+                <b-col>
+                  <b-button
+                    variant="primary"
+                    type="submit"
+                    @click="onHandLeUpdate()"
+                    >Submit</b-button
+                  >
+                </b-col>
+              </b-row>
+              <br />
+            </form>
+          </b-card>
+        </b-col>
+      </div>
+      <!-- <br> -->
+      <div>
+        <b-table-simple hover small caption-top responsive>
+          <b-thead head-variant="dark">
+            <b-tr>
+              <b-th colspan="2">Name</b-th>
+              <b-th colspan="2">Contact</b-th>
+              <b-th colspan="3">Service</b-th>
+              <b-th>Time</b-th>
+              <b-th colspan="2">Dr Name</b-th>
+              <b-th>Status</b-th>
+              <b-th>Action</b-th>
+            </b-tr>
+          </b-thead>
+          <b-tbody v-for="listaptmnt in appointments" :key="listaptmnt.id">
+            <b-tr>
+              <b-td colspan="2">
+                <p v-if="listaptmnt.User">{{ listaptmnt.User.uname }}</p>
+              </b-td>
+              <b-td colspan="2">
+                <p>{{ listaptmnt.User.email }}</p>
+                <p>{{ listaptmnt.User.phone }}</p>
+              </b-td>
+              <b-td colspan="3">{{ listaptmnt.service }}</b-td>
+              <b-td
+                ><p>{{ listaptmnt.date }}</p>
+                <p>{{ listaptmnt.time }}</p>
+              </b-td>
+              <b-td colspan="2"> {{ listaptmnt.drName }} </b-td>
+              <b-td> {{ listaptmnt.status }} </b-td>
+              <b-td>
+                <b-btn variant="info" @click="onHandLeClickUpdate(listaptmnt)">
+                  <span class="fa fa-edit"></span>
+                </b-btn>
+              </b-td>
+            </b-tr>
+          </b-tbody>
+        </b-table-simple>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {

@@ -48,22 +48,19 @@
           ></b-img>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/profilecustomer" active @click="hide"
+              <b-nav-item href="/profiledoctor" active @click="hide"
                 ><i class="fa fa-address-card" aria-hidden="true">
                   Profile</i
                 ></b-nav-item
               >
-              <b-nav-item href="/" @click="hide"
-                ><i class="fa fa-tachometer" aria-hidden="true">
-                  Dashboard
-                </i></b-nav-item
-              >
-              <b-nav-item href="/applyappointment" @click="hide"
+
+              <b-nav-item href="/listappointmentdoctor" @click="hide"
                 ><i class="fa fa-book" aria-hidden="true">
                   Appointment</i
                 ></b-nav-item
               >
-              <b-nav-item href="/historyappointment" @click="hide"
+              
+              <b-nav-item href="/historyappointmentdr" @click="hide"
                 ><i class="fa fa-history" aria-hidden="true">
                   History Appointment</i
                 ></b-nav-item
@@ -96,12 +93,12 @@
           <form>
             <div class="form-group">
               <b-input-group
-                >Username :
+                >Staff ID :
                 <input
                   v-model="form.uid"
                   type="text"
                   class="form-control"
-                  v-if="form.uname"
+                  v-if="form.position"
                   disabled
                 />
                 <span v-else> {{ staff.uid }} </span>
@@ -114,11 +111,27 @@
                   v-model="form.uname"
                   type="text"
                   class="form-control"
-                  v-if="form.uname"
+                  v-if="form.position"
+                  disabled
                 />
                 <span v-else> {{ staff.uname }} </span>
               </b-input-group>
             </div>
+
+            <div class="form-group">
+              <b-input-group
+                >Position :
+                <input
+                  v-model="form.position"
+                  type="text"
+                  class="form-control"
+                  v-if="form.position"
+                  disabled
+                />
+                <span v-else> {{ staff.position }} </span>
+              </b-input-group>
+            </div>
+
             <div class="form-group">
               <b-input-group
                 >Email :
@@ -126,7 +139,7 @@
                   v-model="form.email"
                   type="text"
                   class="form-control"
-                  v-if="form.uname"
+                  v-if="form.position"
                 />
                 <span v-else> {{ staff.email }} </span>
               </b-input-group>
@@ -139,7 +152,7 @@
                   v-model="form.phone"
                   type="text"
                   class="form-control"
-                  v-if="form.uname"
+                  v-if="form.position"
                 />
                 <span v-else> {{ staff.phone }} </span>
               </b-input-group>
@@ -147,14 +160,14 @@
             <b-button
               variant="info"
               type="submit"
-              v-if="form.uname"
+              v-if="form.position"
               @click="onHandLeUpdate()"
               >Update</b-button
             >
             <b-button
               variant="outline-secondary"
               type="submit"
-              v-if="form.uname"
+              v-if="form.position"
               @click="onHandLeCancel()"
               >Cancel</b-button
             >
@@ -214,8 +227,9 @@ export default {
       users: [],
       form: {
         id: "",
-        uid: "kim90",
+        uid: "st14",
         uname: "",
+        position: "",
         email: "",
         phone: "",
         password: ""
@@ -244,6 +258,7 @@ export default {
           this.form = {
             uid: "",
             uname: "",
+            position: "",
             email: "",
             phone: ""
           };
@@ -258,8 +273,9 @@ export default {
 
     onHandLeCancel() {
       this.form = {
-        uid: "kim90",
+        uid: "st14",
         uname: "",
+        position: "",
         email: "",
         phone: "",
         password: ""

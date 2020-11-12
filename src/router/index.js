@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login
   },
@@ -59,6 +59,13 @@ const routes = [
     import( "../views/HistoryAppointment.vue")
   },
   {
+    path: "/historyappointmentdr",
+    name: "HistoryApptDr",
+  
+    component: () =>
+    import( "../views/HistoryApptDr.vue")
+  },
+  {
     path: "/profilestaff",
     name: "ProfileStaff",
   
@@ -71,6 +78,13 @@ const routes = [
   
     component: () =>
     import( "../views/ProfileCustomer.vue")
+  },
+  {
+    path: "/profiledoctor",
+    name: "ProfileDr",
+  
+    component: () =>
+    import( "../views/ProfileDr.vue")
   },
 
 
