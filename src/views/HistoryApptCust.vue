@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavbarAdmin />
+    <NavbarCustomer />
     <br />
 
     <div class="container">
@@ -15,6 +15,8 @@
       </div>
 
       <div>
+      <input v-model="form.UserUid" type="text" class="form-control" hidden />
+
         <b-table-simple hover small caption-top responsive>
           <b-thead head-variant="dark">
             <b-tr>
@@ -22,7 +24,7 @@
               <b-th colspan="2">Contact</b-th>
               <b-th colspan="3">Service</b-th>
               <b-th>Time</b-th>
-              <b-th colspan="2">Dr Name</b-th>
+              <!-- <b-th colspan="2">Dr Name</b-th> -->
               <b-th>Status</b-th>
             </b-tr>
           </b-thead>
@@ -40,7 +42,7 @@
                 ><p>{{ listaptmnt.date }}</p>
                 <p>{{ listaptmnt.time }}</p>
               </b-td>
-              <b-td colspan="2"> {{ listaptmnt.drName }} </b-td>
+              <!-- <b-td colspan="2"> {{ listaptmnt.drName }} </b-td> -->
               <b-td> {{ listaptmnt.status }} </b-td>
             </b-tr>
           </b-tbody>
@@ -51,17 +53,20 @@
 </template>
 
 <script>
-import NavbarAdmin from "@/components/NavbarAdmin.vue";
+
+import NavbarCustomer from "@/components/NavbarCustomer.vue";
 
 export default {
-  components: {
-    NavbarAdmin
+   components: {
+    NavbarCustomer
   },
   data() {
     return {
-      hide: "",
       users: [],
-      appointments: []
+      appointments: [],
+      form:{
+          UserUid: 'kim90'
+      }
     };
   },
   mounted() {
@@ -69,14 +74,15 @@ export default {
   },
 
   methods: {
-    getListAppointment() {
+     getListAppointment() {
+      var uid = this.form.UserUid;
       this.$http
-        .get("http://localhost:3000/appointment/status/approve")
+        .get(`http://localhost:3000/appointment/historycust/approve/${uid}`)
         .then(res => {
           this.appointments = res.data;
           console.log(res.data);
         });
-    }
+    },
   }
 };
 </script>

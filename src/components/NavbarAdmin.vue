@@ -43,23 +43,37 @@
         <div class="px-3 py-2">
           <br><br>
           <div align="center">
-         <img alt="Vue logo" src="../assets/doctor.png" height="150" width="150" />
+         <img alt="Vue logo" src="../assets/img_avatar2.png" height="150" width="150" />
           </div><br>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="/profiledoctor" active @click="hide"
+              <b-nav-item href="/profilestaff" active @click="hide"
                 ><i class="fa fa-address-card" aria-hidden="true">
                   Profile</i
                 ></b-nav-item
               >
-             
-              <b-nav-item href="/listappointmentdoctor" @click="hide"
+              <b-nav-item href="/liststaff" @click="hide"
+                ><i class="fa fa-tachometer" aria-hidden="true">
+                  List Staff
+                </i></b-nav-item
+              >
+              <b-nav-item href="/listappointmentadmin" @click="hide"
                 ><i class="fa fa-book" aria-hidden="true">
                   Appointment</i
                 ></b-nav-item
               >
-              
-              <b-nav-item href="/historyappointmentdr" @click="hide"
+              <b-nav-item href="/service" @click="hide"
+                ><i class="fa fa-book" aria-hidden="true">
+                  Service</i
+                ></b-nav-item
+              >
+
+              <b-nav-item href="/doctorschedule" @click="hide"
+                ><i class="fa fa-book" aria-hidden="true">
+                  Doctor Schedule</i
+                ></b-nav-item
+              >
+              <b-nav-item href="/historyappointment" @click="hide"
                 ><i class="fa fa-history" aria-hidden="true">
                   History Appointment</i
                 ></b-nav-item
@@ -74,8 +88,7 @@
 
 <script>
 export default {
-  name: "Navbar",
-  hide:""
+  name: "NavbarAdmin",
 };
 </script>
 

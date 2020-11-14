@@ -66,6 +66,13 @@ const routes = [
     import( "../views/HistoryApptDr.vue")
   },
   {
+    path: "/historyappointmentcust",
+    name: "HistoryApptCust",
+  
+    component: () =>
+    import( "../views/HistoryApptCust.vue")
+  },
+  {
     path: "/profilestaff",
     name: "ProfileStaff",
   
@@ -85,6 +92,20 @@ const routes = [
   
     component: () =>
     import( "../views/ProfileDr.vue")
+  },
+  {
+    path: "/doctorschedule",
+    name: "ScheduleDr",
+  
+    component: () =>
+    import( "../views/ScheduleDr.vue")
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+  
+    component: () =>
+    import( "../views/Dashboard.vue")
   },
 
 

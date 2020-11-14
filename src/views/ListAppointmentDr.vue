@@ -1,75 +1,6 @@
 <template>
   <div>
-    <b-navbar
-      toggleable="lg"
-      type="light"
-      class="shadow-lg"
-      style="background-color: #28a745;"
-    >
-      <b-button v-b-toggle.sidebar-footer class="fa fa-bars"></b-button>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-button class="fa fa-sign-out" href="/Login">
-            <router-link to="/Login"></router-link
-          ></b-button>
-          <!-- <b-nav-item> <router-link to="/Login">Logout</router-link></b-nav-item> -->
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-
-    <div align="left">
-      <div align="right">
-        <!-- <b-button v-b-toggle.sidebar-footer>Menu</b-button> -->
-      </div>
-
-      <b-sidebar
-        id="sidebar-footer"
-        aria-label="Sidebar with custom footer"
-        no-header
-        shadow
-      >
-        <template #footer="{ hide }">
-          <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
-            <strong class="mr-auto"></strong>
-            <b-button
-              size="sm"
-              @click="hide"
-              class="fa fa-window-close"
-            ></b-button>
-          </div>
-        </template>
-        <div class="px-3 py-2">
-          <b-img
-            src="https://picsum.photos/500/500/?image=54"
-            fluid
-            thumbnail
-          ></b-img>
-          <nav class="mb-3">
-            <b-nav vertical>
-              <b-nav-item href="/profiledoctor" active @click="hide"
-                ><i class="fa fa-address-card" aria-hidden="true">
-                  Profile</i
-                ></b-nav-item
-              >
-
-              <b-nav-item href="/listappointmentdoctor" @click="hide"
-                ><i class="fa fa-book" aria-hidden="true">
-                  Appointment</i
-                ></b-nav-item
-              >
-
-              <b-nav-item href="/historyappointmentdr" @click="hide"
-                ><i class="fa fa-history" aria-hidden="true">
-                  History Appointment</i
-                ></b-nav-item
-              >
-            </b-nav>
-          </nav>
-        </div>
-      </b-sidebar>
-    </div>
+   <Navbar />
     <br />
 
     <div class="container">
@@ -160,7 +91,13 @@
 </template>
 
 <script>
+
+import Navbar from "@/components/Navbar.vue";
+
 export default {
+   components: {
+    Navbar
+  },
   data() {
     return {
       hide: "",

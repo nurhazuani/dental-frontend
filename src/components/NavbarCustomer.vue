@@ -43,23 +43,26 @@
         <div class="px-3 py-2">
           <br><br>
           <div align="center">
-         <img alt="Vue logo" src="../assets/doctor.png" height="150" width="150" />
+         <img alt="Vue logo" src="../assets/customer.jpg" height="150" width="150" />
           </div><br>
           <nav class="mb-3">
-            <b-nav vertical>
-              <b-nav-item href="/profiledoctor" active @click="hide"
+             <b-nav vertical>
+              <b-nav-item href="/profilecustomer" active @click="hide"
                 ><i class="fa fa-address-card" aria-hidden="true">
                   Profile</i
                 ></b-nav-item
               >
-             
-              <b-nav-item href="/listappointmentdoctor" @click="hide"
+              <b-nav-item href="/dashboard" @click="hide"
+                ><i class="fa fa-tachometer" aria-hidden="true">
+                  Dashboard
+                </i></b-nav-item
+              >
+              <b-nav-item href="/applyappointment" @click="hide"
                 ><i class="fa fa-book" aria-hidden="true">
                   Appointment</i
                 ></b-nav-item
               >
-              
-              <b-nav-item href="/historyappointmentdr" @click="hide"
+              <b-nav-item href="/historyappointmentcust" @click="hide"
                 ><i class="fa fa-history" aria-hidden="true">
                   History Appointment</i
                 ></b-nav-item
@@ -74,7 +77,7 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: "NavbarCustomer",
   hide:""
 };
 </script>
