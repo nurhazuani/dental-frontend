@@ -1,15 +1,50 @@
 <template>
   <div id="app">
     <div id="nav">
+      <div>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+          <b-navbar-brand href="#">Dental</b-navbar-brand>
+
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav>
+              <router-link class="nav-link" to="/Home">Home</router-link>
+            </b-navbar-nav>
+
+            <!-- Right aligned nav items -->
+            <b-navbar-nav class="ml-auto">
+              <router-link class="nav-link" to="/login">Login</router-link>
+              <router-link class="nav-link" to="/register"
+                >Register</router-link
+              >
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
+      </div>
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
       <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript">
-        <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-        <link href="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          type="text/javascript"
+        />
+        <link
+          href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <link
+          href="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"
+        />
       </head>
     </div>
+
     <router-view />
   </div>
 </template>

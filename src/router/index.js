@@ -11,60 +11,81 @@ const routes = [
     component: Login
   },
   {
+    path: "/login",
+    name: "Login",
+    component: Login
+  },
+  {
     path: "/register",
     name: "Register",
-    component: () =>
-      import("../views/Register.vue")
+    component: () => import("../views/Register.vue")
   },
   {
     path: "/liststaff",
     name: "Liststaff",
-    
-    component: () =>
-    import("../views/Liststaff.vue")
+
+    component: () => import("../views/Liststaff.vue")
   },
   {
     path: "/service",
     name: "Service",
-   
-    component: () =>
-    import("../views/Service.vue")
+
+    component: () => import("../views/Service.vue")
   },
   {
     path: "/applyappointment",
     name: "Appointment",
-  
-    component: () =>
-    import("../views/Appointment.vue")
+
+    component: () => import("../views/Appointment.vue")
   },
   {
     path: "/listappointmentadmin",
     name: "ListAppointmentAdmin",
-  
-    component: () =>
-    import( "../views/ListAppointmentAdmin.vue")
+
+    component: () => import("../views/ListAppointmentAdmin.vue")
   },
   {
     path: "/listappointmentdoctor",
-    name: "ListAppointmentDr",
-  
-    component: () =>
-    import( "../views/ListAppointmentDr.vue")
+    name: "ListAppointmentDoctor",
+
+    component: () => import("../views/ListAppointmentDoctor.vue")
   },
   {
     path: "/profilestaff",
     name: "ProfileStaff",
-  
-    component: () =>
-    import( "../views/ProfileStaff.vue")
+
+    component: () => import("../views/ProfileStaff.vue")
   },
   {
     path: "/profilecustomer",
     name: "ProfileCustomer",
-  
-    component: () =>
-    import( "../views/ProfileCustomer.vue")
+
+    component: () => import("../views/ProfileCustomer.vue")
   },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+
+    component: () => import("../views/Dashboard.vue")
+  },
+  {
+    path: "/schedule",
+    name: "Schedule",
+
+    component: () => import("../views/Schedule.vue")
+  },
+  {
+    path: "/listscheduleDoctor",
+    name: "ListScheduleDoctor",
+
+    component: () => import("../views/ListScheduleDoctor.vue")
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+
+    component: () => import("../views/Profile.vue")
+  }
 ];
 
 const router = new VueRouter({

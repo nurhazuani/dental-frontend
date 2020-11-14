@@ -6,9 +6,9 @@
           align="center"
           bg-variant="grey"
           text-variant="black"
-          header="Register User"
+          header="User Registration"
         >
-          <!-- <h2>Register User</h2> -->
+          <!-- <h2>User Registration</h2> -->
 
           <form>
             <input
@@ -18,13 +18,16 @@
               placeholder="role"
               hidden
             />
+
             <div class="form-group">
               <b-input-group
                 ><input
-                  v-model="form.uid"
-                  type="text"
+                  type="username"
                   class="form-control"
-                  placeholder="Username"
+                  id="username"
+                  v-model="username"
+                  required
+                  placeholder="Enter Username"
                   @keydown.space.prevent
                 />
               </b-input-group>
@@ -33,10 +36,12 @@
             <div class="form-group">
               <b-input-group
                 ><input
-                  v-model="form.uname"
                   type="text"
                   class="form-control"
-                  placeholder="Full Name"
+                  id="fullname"
+                  v-model="fullname"
+                  required
+                  placeholder="Enter Full Name"
                 />
               </b-input-group>
             </div>
@@ -44,31 +49,44 @@
             <div class="form-group">
               <b-input-group
                 ><input
-                  v-model="form.email"
-                  type="text"
+                  type="email"
                   class="form-control"
-                  placeholder="Email..."
+                  id="email"
+                  v-model="email"
+                  required
+                  placeholder="Enter Email"
                 />
               </b-input-group>
             </div>
 
             <div class="form-group">
-              <b-input-group
-                ><input
-                  v-model="form.password"
-                  type="password"
-                  class="form-control"
-                  placeholder="confirm password"
-                />
-              </b-input-group>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                v-model="password"
+                required
+                placeholder="Enter Password"
+              />
             </div>
-            <b-button
-              block
-              variant="primary"
-              type="submit"
-              @click="onHandLeAdd()"
-              >Register User</b-button
-            >
+
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="repassword"
+                v-model="rePassword"
+                required
+                placeholder="Re-enter Password"
+              />
+              <div v-if="password != repassword" class="text-danger">
+                Sorry, password is not match
+              </div>
+            </div>
+
+            <button @click="Register" class="btn-lg btn-primary">
+              Register
+            </button>
             <br />
             <div class="page-breadcrumb">
               <nav aria-label="breadcrumb">
@@ -90,7 +108,10 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
+  name: "register",
   data() {
     return {
       users: [],
@@ -99,15 +120,30 @@ export default {
         uname: "",
         email: "",
         password: "",
+        repassword: "",
         role: "customer"
       }
     };
   },
+
   mounted() {
     this.getUser(); //call back method todos
   },
 
   methods: {
+    register: function() {
+      console.log("Email: " + this.email);
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          console.log(user.user);
+        })
+        .catch(function(error) {
+          alert("Unable to register user: " + error.message);
+        });
+    },
+
     getUser() {
       this.$http.get("http://localhost:3000/users").then(res => {
         this.users = res.data;
@@ -120,6 +156,7 @@ export default {
           uname: "",
           email: "",
           password: "",
+          repassword: "",
           role: ""
         };
         this.getUser();
