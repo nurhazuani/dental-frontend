@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div align="left">
       <div align="right">
@@ -45,7 +46,9 @@
         </ol>
       </nav>
     </div>
-
+  
+    <h3 v-if="user">Hello, {{user.uname}}</h3>
+    <h3 v-if="!user">You are not logged in</h3>
     <b-row>
       <b-col lg="6" class="pb-2"
         ><b-button variant="outline-warning"
@@ -70,17 +73,20 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    this.getdashboard();
-  },
+import axios from "axios"
 
-  methods: {
-    getdashboard() {
-      this.$http.get("http://localhost:3000/dashboard").then(res => {
-        this.getdashboard = res.data;
-      });
+export default {
+    name: 'Dashboard',
+    data(){
+      return{
+        user: null
+      }
+    },
+
+    async created(){
+        const response = await axios.get('user');
+
+        this.user=response.data;
     }
-  }
 };
 </script>

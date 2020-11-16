@@ -9,7 +9,7 @@
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-              <router-link class="nav-link" to="/Home">Home</router-link>
+              <router-link class="nav-link" to="/Dashboard">Home</router-link>
             </b-navbar-nav>
 
             <!-- Right aligned nav items -->
@@ -48,6 +48,19 @@
     <router-view />
   </div>
 </template>
+
+<script>
+// import Dashboard from './views/Dashboard.vue'
+//import Login from './views/Login.vue'
+
+export default {
+  name: "App",
+  components:{
+    // Dashboard,
+    //Login
+  }
+}
+</script>
 
 <style>
 #app {

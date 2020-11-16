@@ -7,12 +7,12 @@
         <h1>Login to Dental Self-Appointment Schedulling</h1>
         <br />
         <br />
-        <form>
+        <form @submit.prevent="handleSubmit">
           <div class="form-group">
             <input
               type="email"
               class="form-control"
-              id="email"
+
               v-model="email"
               placeholder="Enter Email"
               required
@@ -22,7 +22,6 @@
             <input
               type="password"
               class="form-control"
-              id="password"
               v-model="password"
               required
               placeholder="Enter Password"
@@ -37,21 +36,26 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
   name: "login",
   data() {
     return {
-      form: {
         email: "",
         password: ""
-      }
     };
-  },
+ },
 
   methods: {
-    login: function() {
-      console.log("Email: " + this.email)
-      console.log("Password: " + this.password)
+    async handleSubmit(){
+      const response = await axios.ppost('login', {
+          email: this.email,
+          password: this.password
+      });
+
+      localStorage.setItem('token', response.data.token);
+      this.$router.push('/dashboard');
     }
   }
 };

@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <b-row class="mt-5 d-flex justify-content-center">
       <b-col cols="6">
@@ -10,7 +11,7 @@
         >
           <!-- <h2>User Registration</h2> -->
 
-          <form>
+          <form @submit.prevent="handleSubmit">
             <input
               v-model="form.role"
               type="text"
@@ -24,9 +25,7 @@
                 ><input
                   type="username"
                   class="form-control"
-                  id="username"
-                  v-model="username"
-                  required
+                  v-model="uname"
                   placeholder="Enter Username"
                   @keydown.space.prevent
                 />
@@ -38,9 +37,7 @@
                 ><input
                   type="text"
                   class="form-control"
-                  id="fullname"
-                  v-model="fullname"
-                  required
+                  v-model="fname"
                   placeholder="Enter Full Name"
                 />
               </b-input-group>
@@ -51,9 +48,7 @@
                 ><input
                   type="email"
                   class="form-control"
-                  id="email"
                   v-model="email"
-                  required
                   placeholder="Enter Email"
                 />
               </b-input-group>
@@ -63,9 +58,7 @@
               <input
                 type="password"
                 class="form-control"
-                id="password"
                 v-model="password"
-                required
                 placeholder="Enter Password"
               />
             </div>
@@ -74,25 +67,21 @@
               <input
                 type="password"
                 class="form-control"
-                id="repassword"
-                v-model="rePassword"
-                required
+                v-model="repassword"
                 placeholder="Re-enter Password"
               />
-              <div v-if="password != repassword" class="text-danger">
-                Sorry, password is not match
-              </div>
+
             </div>
 
-            <button @click="Register" class="btn-lg btn-primary">
-              Register
+            <button class="btn-lg btn-primary">
+              Sign Up
             </button>
             <br />
             <div class="page-breadcrumb">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
-                    {{ meesage }}
+                    {{ message }}
                   </li>
                 </ol>
               </nav>
@@ -108,7 +97,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import axios from "axios"
 
 export default {
   name: "register",
@@ -118,49 +107,27 @@ export default {
       form: {
         uid: "",
         uname: "",
+        fname: "",
         email: "",
         password: "",
         repassword: "",
-        role: "customer"
       }
-    };
-  },
-
-  mounted() {
-    this.getUser(); //call back method todos
+    }
   },
 
   methods: {
-    register: function() {
-      console.log("Email: " + this.email);
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          console.log(user.user);
-        })
-        .catch(function(error) {
-          alert("Unable to register user: " + error.message);
-        });
-    },
+    async handleSubmit(){
+      const response = await axios.post("register", {
+        uname: this.uname,
+        fname: this.fname,
+        email: this.email,
+        password: this.password,
+        repassword: this.repassword
+      });
 
-    getUser() {
-      this.$http.get("http://localhost:3000/users").then(res => {
-        this.users = res.data;
-      });
-    },
-    onHandLeAdd() {
-      this.$http.post("http://localhost:3000/users", this.form).then(() => {
-        this.form = {
-          uid: "",
-          uname: "",
-          email: "",
-          password: "",
-          repassword: "",
-          role: ""
-        };
-        this.getUser();
-      });
+      console.log(response);
+
+      this.$router.push('/login');
     }
   }
 };
