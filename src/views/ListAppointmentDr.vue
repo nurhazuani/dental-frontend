@@ -106,7 +106,8 @@ export default {
       form: {
         UserUid: "",
         status: "",
-        drName: "Nurhazuani Nurdin"
+        uid:"",
+        drName: "Amalin Najiha"
       }
     };
   },

@@ -63,13 +63,13 @@
                 ></b-nav-item
               >
               <b-nav-item href="/service" @click="hide"
-                ><i class="fa fa-book" aria-hidden="true">
+                ><i class="fa fa-tasks" aria-hidden="true">
                   Service</i
                 ></b-nav-item
               >
 
               <b-nav-item href="/doctorschedule" @click="hide"
-                ><i class="fa fa-book" aria-hidden="true">
+                ><i class="fa fa-list-alt" aria-hidden="true">
                   Doctor Schedule</i
                 ></b-nav-item
               >

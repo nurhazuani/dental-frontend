@@ -114,11 +114,12 @@
       </b-col>
 
       <br />
-      <b-nav tabs justified>
+      <!-- <b-nav tabs justified>
         <b-nav-item active>List Appointment</b-nav-item>
         <b-nav-item>History</b-nav-item>
-      </b-nav>
+      </b-nav> -->
       <br />
+      <!-- <Table /> -->
       <b-table-simple hover small caption-top responsive>
         <b-thead head-variant="dark">
           <b-tr>
@@ -149,10 +150,11 @@
 
 <script>
 import NavbarCustomer from "@/components/NavbarCustomer.vue";
+// import Table from "@/components/Table.vue";
 
 export default {
   components: {
-    NavbarCustomer
+    NavbarCustomer,
   },
   data() {
     return {
@@ -161,7 +163,7 @@ export default {
       services: [],
       appointments: [],
       form: {
-        UserUid: "kim90",
+        UserUid: "ezza95",
         service: "",
         date: "",
         time: "",
@@ -179,11 +181,12 @@ export default {
   methods: {
     getAppointment() {
       var uid = this.form.UserUid;
-      this.$http.get(`http://localhost:3000/appointment/${uid}`).then(res => {
+      this.$http.get(`http://localhost:3000/appointment/historycust/request/${uid}`).then(res => {
         this.appointments = res.data;
         console.log(res.data);
       });
     },
+    
 
     getUser() {
       //kejap

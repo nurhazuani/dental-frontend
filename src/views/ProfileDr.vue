@@ -43,7 +43,6 @@
                   type="text"
                   class="form-control"
                   v-if="form.position"
-                  disabled
                 />
                 <span v-else> {{ staff.uname }} </span>
               </b-input-group>
@@ -164,7 +163,7 @@ export default {
       users: [],
       form: {
         id: "",
-        uid: "st14",
+        uid: "DR02",
         uname: "",
         position: "",
         email: "",
@@ -210,7 +209,7 @@ export default {
 
     onHandLeCancel() {
       this.form = {
-        uid: "st14",
+        uid: "DR01",
         uname: "",
         position: "",
         email: "",

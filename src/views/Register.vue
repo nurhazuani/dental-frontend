@@ -37,6 +37,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Full Name"
+                  required
                 />
               </b-input-group>
             </div>
@@ -55,10 +56,23 @@
             <div class="form-group">
               <b-input-group
                 ><input
+                  v-model="form.phone"
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone. No"
+                  required
+                />
+              </b-input-group>
+            </div>
+
+            <div class="form-group">
+              <b-input-group
+                ><input
                   v-model="form.password"
                   type="password"
                   class="form-control"
                   placeholder="confirm password"
+                  required
                 />
               </b-input-group>
             </div>
@@ -91,6 +105,7 @@
 
 <script>
 export default {
+  name: "Register",
   data() {
     return {
       users: [],
@@ -98,6 +113,7 @@ export default {
         uid: "",
         uname: "",
         email: "",
+        phone:"",
         password: "",
         role: "customer"
       }
@@ -119,11 +135,14 @@ export default {
           uid: "",
           uname: "",
           email: "",
+          phone:"",
           password: "",
           role: ""
         };
         this.getUser();
       });
+      console.log("success")
+      // this.$router.push('/login')
     }
   }
 };

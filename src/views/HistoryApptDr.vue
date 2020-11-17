@@ -66,7 +66,7 @@ export default {
       users: [],
       appointments: [],
       form:{
-          drName: 'Nurhazuani Nurdin'
+          drName: 'Amalin Najiha'
       }
     };
   },

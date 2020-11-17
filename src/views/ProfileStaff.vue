@@ -124,7 +124,7 @@
                 >Password:
                 <input
                   v-model="form.password"
-                  type="password"
+                  type="text"
                   class="form-control"
                 />
               </b-input-group>
@@ -164,7 +164,7 @@ export default {
       users: [],
       form: {
         id: "",
-        uid: "AT2",
+        uid: "ST02",
         uname: "",
         position: "",
         email: "",
@@ -210,7 +210,7 @@ export default {
 
     onHandLeCancel() {
       this.form = {
-        uid: "AT2",
+        uid: "ST01",
         uname: "",
         position: "",
         email: "",

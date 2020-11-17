@@ -15,6 +15,7 @@
       </div>
 
       <div>
+           <b-form-group align="left" label="Dr Name:">
         <b-form-select
           v-model="form.drName"
           :options="users"
@@ -23,6 +24,7 @@
           @change="getListAppointment"
         >
         </b-form-select>
+           </b-form-group>
         <br /><br />
         <b-table-simple hover small caption-top responsive>
           <b-thead head-variant="dark">

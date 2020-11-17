@@ -13,6 +13,15 @@
           </ol>
         </nav>
       </div>
+      <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span class="fa fa-edit"> :: Update Dr Name </span>
+            </li>
+          </ol>
+        </nav>
+      </div>
       <input v-model="form.UserUid" type="text" class="form-control" hidden />
       <input v-model="form.id" type="text" class="form-control" hidden />
       <div v-if="form.id">
@@ -40,6 +49,12 @@
                     type="submit"
                     @click="onHandLeUpdate()"
                     >Submit</b-button
+                  >
+                  <b-button
+                    variant="outline-secondary"
+                    type="submit"
+                    @click="onHandLeCancel()"
+                    >Cancel</b-button
                   >
                 </b-col>
               </b-row>
@@ -92,12 +107,11 @@
 </template>
 
 <script>
-
 import NavbarAdmin from "@/components/NavbarAdmin.vue";
 
 export default {
   components: {
-    NavbarAdmin
+    NavbarAdmin,
   },
   data() {
     return {
@@ -106,8 +120,8 @@ export default {
       appointments: [],
       form: {
         UserUid: "",
-        drName: ""
-      }
+        drName: "",
+      },
     };
   },
   mounted() {
@@ -119,7 +133,7 @@ export default {
     getListAppointment() {
       this.$http
         .get("http://localhost:3000/appointment/status/request")
-        .then(res => {
+        .then((res) => {
           this.appointments = res.data;
           console.log(res.data);
         });
@@ -128,7 +142,7 @@ export default {
     getPosition() {
       this.$http
         .get("http://localhost:3000/users/position/doctor")
-        .then(res => {
+        .then((res) => {
           this.users = res.data;
         });
     },
@@ -140,7 +154,7 @@ export default {
         .then(() => {
           this.form = {
             // UserUid:'',
-            drName: ""
+            drName: "",
           };
           this.getListAppointment();
         });
@@ -149,7 +163,13 @@ export default {
     onHandLeClickUpdate(listaptmnt) {
       this.form = listaptmnt;
       this.getListAppointment();
+    },
+    onHandLeCancel() {
+      this.form = {
+         UserUid: "",
+         drName: "",
+      };
     }
-  }
+  },
 };
 </script>

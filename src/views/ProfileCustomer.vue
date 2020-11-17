@@ -108,7 +108,7 @@
                 >Password:
                 <input
                   v-model="form.password"
-                  type="password"
+                  type="text"
                   class="form-control"
                 />
               </b-input-group>
@@ -138,6 +138,7 @@
 import NavbarCustomer from "@/components/NavbarCustomer.vue";
 
 export default {
+  name: "profilecustomer",
   components: {
     NavbarCustomer
   },
@@ -147,7 +148,7 @@ export default {
       users: [],
       form: {
         id: "",
-        uid: "kim90",
+        uid: "ezza95",
         uname: "",
         email: "",
         phone: "",
@@ -191,7 +192,7 @@ export default {
 
     onHandLeCancel() {
       this.form = {
-        uid: "kim90",
+        uid: "jihyo88",
         uname: "",
         email: "",
         phone: "",
